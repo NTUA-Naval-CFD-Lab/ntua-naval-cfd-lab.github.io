@@ -34,7 +34,8 @@ import pandas as pd
 
 # In[3]:
 
-publications = pd.read_csv("publications.tsv", sep="\t", header=0)
+# publications = pd.read_csv("publications.tsv", sep="\t", header=0)
+publications = pd.read_csv("publications_out.tsv", sep="\t", header=0) # for testing with the output of bib_to_tsv.py
 publications
 
 
@@ -73,7 +74,8 @@ for row, item in publications.iterrows():
     md = "---\ntitle: \""   + item.title + '"\n'
 
     # TODO Update to use the category assigned in the TSV file
-    md += """collection: manuscripts"""
+    md += """collection: publications\n"""
+    md += """category: manuscripts"""
     
     md += """\npermalink: /publication/""" + html_filename
     
@@ -102,8 +104,8 @@ for row, item in publications.iterrows():
     md += "\nRecommended citation: " + item.citation
     
     md_filename = os.path.basename(md_filename)
-       
-    with open("../_publications/" + md_filename, 'w') as f:
+      
+    with open("./_publications/" + md_filename, 'w') as f:
         f.write(md)
 
 
